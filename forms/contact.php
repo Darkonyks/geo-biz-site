@@ -11,12 +11,22 @@ use PHPMailer\PHPMailer\Exception;
 
 require '../vendor/autoload.php';
 
-// Email configuration
-$receiving_email_address = 'office@geo-biz.com';
-$smtp_host = 'host107.dwhost.net'; // ili vaš SMTP server
-$smtp_username = 'office@geo-biz.com'; // zamenite sa vašim emailom
-$smtp_password = 'Remorker1!Geobiz'; // zamenite sa vašom app lozinkom
-$smtp_port = 587;
+// Email configuration — učitava se iz config.php (van Git-a).
+// Kopirajte config.example.php u config.php i popunite vrednosti.
+$config_file = __DIR__ . '/config.php';
+if (!file_exists($config_file)) {
+    error_log("Missing config.php in forms/ directory");
+    http_response_code(500);
+    echo json_encode(["success" => false, "message" => "Server configuration error."]);
+    exit;
+}
+$config = require $config_file;
+
+$receiving_email_address = $config['receiving_email_address'];
+$smtp_host     = $config['smtp_host'];
+$smtp_username = $config['smtp_username'];
+$smtp_password = $config['smtp_password'];
+$smtp_port     = $config['smtp_port'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'] ?? '';

@@ -1,0 +1,489 @@
+/**
+* GeoBiz — Theme / Redizajn sloj
+* Učitava se POSLE main.css i variables.css i override-uje izgled.
+* Sadrži: dizajn tokene, modernizaciju komponenti, svetlu+tamnu temu,
+* fluid tipografiju, pristupačnost i responzivne dorade.
+* Brend boja ostaje teal (#0ea2bd).
+*/
+
+/*--------------------------------------------------------------
+# 1. Dizajn tokeni
+--------------------------------------------------------------*/
+:root {
+  /* Brend skala (teal) — #0ea2bd je --brand-500 */
+  --brand-50: #e6f7fa;
+  --brand-100: #c2ecf3;
+  --brand-200: #8fdce8;
+  --brand-300: #5cccdd;
+  --brand-400: #2db8cf;
+  --brand-500: #0ea2bd;
+  --brand-600: #0c8aa1;
+  --brand-700: #0a7185;
+  --brand-800: #075a6a;
+  --brand-900: #053f4a;
+
+  /* Spacing skala */
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --section-py: clamp(3rem, 6vw, 6rem);
+
+  /* Radius skala */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Shadow skala */
+  --shadow-sm: 0 2px 8px rgba(var(--color-secondary-rgb), .08);
+  --shadow-md: 0 8px 24px rgba(var(--color-secondary-rgb), .10);
+  --shadow-lg: 0 16px 48px rgba(var(--color-secondary-rgb), .14);
+
+  /* Fluid tipografija */
+  --fs-h1: clamp(2rem, 1.2rem + 3.2vw, 3.25rem);
+  --fs-h2: clamp(1.75rem, 1.1rem + 2.4vw, 3rem);
+  --fs-h3: clamp(1.35rem, 1rem + 1.4vw, 2rem);
+  --fs-body: clamp(1rem, .96rem + .2vw, 1.0625rem);
+  --fs-lead: clamp(1.1rem, 1rem + .5vw, 1.375rem);
+
+  /* Semantičke površine — SVETLA tema */
+  --surface-0: #ffffff;          /* pozadina stranice */
+  --surface-1: #ffffff;          /* kartice / izdignuto */
+  --surface-2: #f5f7f9;          /* polja / sekcije */
+  --surface-3: #eef1f4;          /* alternativne sekcije */
+  --text-strong: #1a1f24;        /* naslovi */
+  --text-body: #3a4753;          /* telo teksta */
+  --text-muted: #6b7785;         /* prigušeno */
+  --border-subtle: rgba(var(--color-secondary-rgb), .14);
+  --header-bg: rgba(255, 255, 255, .72);
+
+  /* Link/akcenat na pristupačan ton */
+  --color-links: var(--brand-700);
+  --color-links-hover: var(--brand-500);
+}
+
+/*--------------------------------------------------------------
+# 2. TAMNA tema (dugme: data-theme="dark"; sistem: prefers-color-scheme)
+--------------------------------------------------------------*/
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --surface-0: #0f1419;
+    --surface-1: #1a2128;
+    --surface-2: #232b34;
+    --surface-3: #161c22;
+    --text-strong: #eef2f5;
+    --text-body: #c4ccd4;
+    --text-muted: #93a0ac;
+    --border-subtle: rgba(255, 255, 255, .12);
+    --header-bg: rgba(15, 20, 25, .8);
+    --color-default: #eef2f5;
+    --color-links: var(--brand-300);
+    --color-links-hover: var(--brand-200);
+    --bs-body-bg: #0f1419;
+    --bs-body-color: #c4ccd4;
+  }
+}
+
+html[data-theme="dark"] {
+  --surface-0: #0f1419;
+  --surface-1: #1a2128;
+  --surface-2: #232b34;
+  --surface-3: #161c22;
+  --text-strong: #eef2f5;
+  --text-body: #c4ccd4;
+  --text-muted: #93a0ac;
+  --border-subtle: rgba(255, 255, 255, .12);
+  --header-bg: rgba(15, 20, 25, .8);
+  --color-default: #eef2f5;
+  --color-links: var(--brand-300);
+  --color-links-hover: var(--brand-200);
+  --bs-body-bg: #0f1419;
+  --bs-body-color: #c4ccd4;
+}
+
+/*--------------------------------------------------------------
+# 3. Baza / globalno
+--------------------------------------------------------------*/
+body {
+  background-color: var(--surface-0);
+  color: var(--text-body);
+  font-size: var(--fs-body);
+  transition: background-color .3s ease, color .3s ease;
+}
+
+a {
+  color: var(--color-links);
+}
+a:hover {
+  color: var(--color-links-hover);
+}
+
+/* Fluid tipografija na ključne naslove */
+.section-header h2 { font-size: var(--fs-h2); color: var(--text-strong); }
+.section-header p { color: var(--text-muted); }
+.hero-animated h2 { font-size: var(--fs-h2); }
+.hero-animated h1 { font-size: var(--fs-h1); }
+.about h3,
+.cta .content h3,
+.features .tab-pane h3,
+.breadcrumbs h2 { font-size: var(--fs-h3); color: var(--text-strong); }
+
+h1, h2, h3, h4, h5, h6 { color: var(--text-strong); }
+
+/*--------------------------------------------------------------
+# 4. Pristupačnost
+--------------------------------------------------------------*/
+:focus-visible {
+  outline: 3px solid var(--brand-400);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+/* poništi nasleđeno gašenje fokusa iz main.css */
+.php-email-form .form-control:focus,
+*:focus-visible {
+  outline-color: var(--brand-400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# 5. Header / Navbar (glass efekat)
+--------------------------------------------------------------*/
+.header {
+  transition: background-color .35s ease, box-shadow .35s ease, padding .35s ease;
+}
+.header.sticked {
+  background: var(--header-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  box-shadow: var(--shadow-sm);
+}
+.header .logo h1 { color: var(--text-strong); }
+
+/* Dugmad u headeru */
+.header .btn-getstarted,
+.header .theme-toggle {
+  border-radius: var(--radius-pill);
+}
+.header .btn-getstarted {
+  padding: 9px 26px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+.header .btn-getstarted:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: var(--brand-600);
+}
+
+@media (min-width: 1280px) {
+  /* Moderniji dropdown */
+  .navbar .dropdown ul {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2) 0;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    margin-top: 8px;
+  }
+  .navbar .dropdown ul a {
+    padding: 11px 22px;
+  }
+  .navbar a,
+  .navbar a:focus {
+    color: var(--text-body);
+  }
+}
+
+/* Tema dugme (ubacuje main.js) */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-left: 12px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-body);
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  transition: background-color .25s ease, color .25s ease, transform .25s ease;
+}
+.theme-toggle:hover {
+  color: var(--brand-500);
+  transform: translateY(-2px);
+}
+@media (max-width: 1279px) {
+  .theme-toggle {
+    position: fixed;
+    top: 18px;
+    right: 70px;
+    z-index: 9999;
+    background: var(--surface-1);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/*--------------------------------------------------------------
+# 6. Hero
+--------------------------------------------------------------*/
+.hero-animated {
+  background: radial-gradient(1200px 600px at 70% -10%, rgba(var(--color-primary-rgb), .12), transparent 60%),
+              linear-gradient(180deg, var(--surface-2), var(--surface-0));
+}
+.hero-animated h1,
+.hero-animated h2 { color: var(--text-strong); }
+.hero-animated h1 span,
+.hero-animated h2 span { color: var(--brand-500); }
+
+/*--------------------------------------------------------------
+# 7. Sekcije / pozadine (svetla i tamna)
+--------------------------------------------------------------*/
+.about,
+.services,
+.features,
+.portfolio,
+.contact,
+.pricing,
+.clients { background-color: var(--surface-0); }
+
+.breadcrumbs {
+  background-color: var(--surface-3);
+}
+.cta {
+  background: linear-gradient(120deg, var(--brand-700), var(--brand-500));
+}
+
+/*--------------------------------------------------------------
+# 8. Service kartice
+--------------------------------------------------------------*/
+.featured-services .service-item,
+.services .service-item .details {
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-sm);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.featured-services .service-item:hover,
+.services .service-item:hover .details {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.services .service-item .img {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+.services .service-item .img img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  width: 100%;
+  transition: transform .5s ease;
+}
+.services .service-item:hover .img img {
+  transform: scale(1.05);
+}
+.services .service-item .details h3 { color: var(--text-strong); }
+.services .service-item .details p { color: var(--text-muted); }
+.services .details .icon {
+  box-shadow: var(--shadow-md);
+}
+
+/*--------------------------------------------------------------
+# 8b. Slike na podstranicama (features) — spreči overflow/overlap
+   Originalni HTML ima inline style="width:40em" koji prelazi
+   širinu kolone (col-lg-6) i prekriva tekst u susednoj koloni.
+--------------------------------------------------------------*/
+.features .arck-working-skill-img,
+.features .col-lg-6 > .img {
+  max-width: 100%;
+}
+.features .arck-working-skill-img img,
+.features .col-lg-6 > .img img {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+/*--------------------------------------------------------------
+# 9. Features / tabovi + About pills
+--------------------------------------------------------------*/
+.features .nav-link {
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text-body);
+  transition: background-color .3s ease, color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.features .nav-link:hover { transform: translateY(-3px); }
+.features .nav-link.active {
+  background: var(--brand-500);
+  box-shadow: var(--shadow-md);
+}
+.features .tab-pane { color: var(--text-body); }
+
+.about .nav-pills .nav-link {
+  border-radius: var(--radius-pill);
+  color: var(--text-body);
+}
+.about .nav-pills .nav-link.active {
+  background: var(--brand-500);
+  color: #fff;
+}
+.about .tab-content h4 { color: var(--text-body); font-weight: 500; }
+
+/*--------------------------------------------------------------
+# 10. Testimonials / Obuke
+--------------------------------------------------------------*/
+.testimonials .testimonial-item {
+  border-radius: var(--radius-lg);
+}
+.swiper-pagination .swiper-pagination-bullet {
+  background: var(--brand-300);
+  opacity: .5;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+  background: var(--brand-500);
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# 11. Portfolio
+--------------------------------------------------------------*/
+.portfolio .portfolio-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.portfolio .portfolio-item img { transition: transform .5s ease; }
+.portfolio-isotope .portfolio-filters li {
+  transition: color .3s ease;
+}
+.portfolio-isotope .portfolio-filters li.filter-active {
+  color: var(--brand-500);
+}
+
+/*--------------------------------------------------------------
+# 12. Kontakt forma
+--------------------------------------------------------------*/
+.contact .info {
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+}
+.contact .info h4 { color: var(--text-strong); }
+.contact .info p { color: var(--text-muted); }
+.contact .php-email-form {
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+.contact .php-email-form input[type=text],
+.contact .php-email-form input[type=email],
+.contact .php-email-form textarea {
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-body);
+  min-height: 48px;
+}
+.contact .php-email-form input::placeholder,
+.contact .php-email-form textarea::placeholder { color: var(--text-muted); }
+.contact .php-email-form input:focus,
+.contact .php-email-form textarea:focus {
+  border-color: var(--brand-400);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), .15);
+}
+.contact .php-email-form button[type=submit] {
+  border-radius: var(--radius-pill);
+  padding: 13px 44px;
+  min-height: 48px;
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+.contact .php-email-form button[type=submit]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: var(--brand-600);
+}
+
+/*--------------------------------------------------------------
+# 13. CTA dugme
+--------------------------------------------------------------*/
+.cta .cta-btn,
+.read-more {
+  border-radius: var(--radius-pill);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.cta .cta-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/*--------------------------------------------------------------
+# 14. Footer
+--------------------------------------------------------------*/
+.footer .footer-content .footer-links a {
+  transition: color .25s ease, padding-left .25s ease;
+}
+.footer .footer-content .footer-links a:hover {
+  color: var(--brand-300);
+  padding-left: 4px;
+}
+.footer .footer-legal .social-links a {
+  border-radius: var(--radius-pill);
+}
+
+/*--------------------------------------------------------------
+# 15. Dark mode — dorade površina koje su u originalu tvrdo bele
+--------------------------------------------------------------*/
+html[data-theme="dark"] body,
+html:not([data-theme="light"]) body {
+  /* obezbeđeno tokenima iznad */
+}
+html[data-theme="dark"] .services .details,
+html[data-theme="dark"] .featured-services .service-item,
+html[data-theme="dark"] .features .nav-link,
+html[data-theme="dark"] .contact .info,
+html[data-theme="dark"] .contact .php-email-form,
+html[data-theme="dark"] .faq .accordion-item,
+html[data-theme="dark"] .pricing .pricing-item {
+  background: var(--surface-1);
+}
+html[data-theme="dark"] .breadcrumbs { background: var(--surface-3); }
+html[data-theme="dark"] .header .logo h1 { color: var(--text-strong); }
+html[data-theme="dark"] .navbar a,
+html[data-theme="dark"] .navbar a:focus { color: var(--text-body); }
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .services .details,
+  html:not([data-theme="light"]) .featured-services .service-item,
+  html:not([data-theme="light"]) .features .nav-link,
+  html:not([data-theme="light"]) .contact .info,
+  html:not([data-theme="light"]) .contact .php-email-form,
+  html:not([data-theme="light"]) .faq .accordion-item,
+  html:not([data-theme="light"]) .pricing .pricing-item {
+    background: var(--surface-1);
+  }
+  html:not([data-theme="light"]) .breadcrumbs { background: var(--surface-3); }
+}
+
+/*--------------------------------------------------------------
+# 16. Responzivne dorade
+--------------------------------------------------------------*/
+section,
+.section-bg { padding-top: var(--section-py); padding-bottom: var(--section-py); }
+
+@media (max-width: 575px) {
+  .header .btn-getstarted { padding: 8px 18px; font-size: 14px; }
+  .services .service-item .img img { aspect-ratio: 16 / 9; }
+}
