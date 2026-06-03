@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Cuvanje i bezbednost podataka">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eafbfe"/><stop offset="1" stop-color="#cdeef6"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0ea2bd"/><stop offset="1" stop-color="#0a7185"/></linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2db8cf"/><stop offset="1" stop-color="#0a7185"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7b955"/><stop offset="1" stop-color="#ef8f3c"/></linearGradient>
+  </defs>
+  <rect x="8" y="8" width="624" height="464" rx="32" fill="url(#bg)"/>
+  <circle cx="320" cy="232" r="150" fill="#ffffff" opacity="0.55"/>
+  <circle cx="520" cy="104" r="46" fill="#8fdce8" opacity="0.5"/>
+  <circle cx="116" cy="384" r="30" fill="#8fdce8" opacity="0.5"/>
+  <g fill="#0ea2bd" opacity="0.45"><circle cx="486" cy="392" r="5"/><circle cx="508" cy="392" r="5"/><circle cx="530" cy="392" r="5"/><circle cx="486" cy="414" r="5"/><circle cx="508" cy="414" r="5"/><circle cx="530" cy="414" r="5"/></g>
+
+  <ellipse cx="300" cy="146" rx="86" ry="26" fill="url(#teal)"/>
+  <path d="M214 146 v54 a86 26 0 0 0 172 0 v-54" fill="#0ea2bd"/>
+  <path d="M214 200 v54 a86 26 0 0 0 172 0 v-54" fill="#0a7185"/>
+  <ellipse cx="300" cy="146" rx="86" ry="26" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <path d="M214 200 a86 26 0 0 0 172 0" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.6"/>
+  <circle cx="300" cy="146" r="7" fill="#bff0a0"/>
+  <g transform="translate(396,250)"><path d="M0-46l44 16v30c0 30-22 46-44 54-22-8-44-24-44-54v-30z" fill="#0ea2bd" stroke="#ffffff" stroke-width="4"/><path d="M-18 4l12 12 26-28" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

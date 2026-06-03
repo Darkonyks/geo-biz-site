@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Projektovanje mrezne infrastrukture">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eafbfe"/><stop offset="1" stop-color="#cdeef6"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0ea2bd"/><stop offset="1" stop-color="#0a7185"/></linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2db8cf"/><stop offset="1" stop-color="#0a7185"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7b955"/><stop offset="1" stop-color="#ef8f3c"/></linearGradient>
+  </defs>
+  <rect x="8" y="8" width="624" height="464" rx="32" fill="url(#bg)"/>
+  <circle cx="320" cy="232" r="150" fill="#ffffff" opacity="0.55"/>
+  <circle cx="520" cy="104" r="46" fill="#8fdce8" opacity="0.5"/>
+  <circle cx="116" cy="384" r="30" fill="#8fdce8" opacity="0.5"/>
+  <g fill="#0ea2bd" opacity="0.45"><circle cx="486" cy="392" r="5"/><circle cx="508" cy="392" r="5"/><circle cx="530" cy="392" r="5"/><circle cx="486" cy="414" r="5"/><circle cx="508" cy="414" r="5"/><circle cx="530" cy="414" r="5"/></g>
+
+  <g stroke="#0ea2bd" stroke-width="5" opacity="0.8">
+    <line x1="320" y1="240" x2="180" y2="140"/><line x1="320" y1="240" x2="460" y2="140"/>
+    <line x1="320" y1="240" x2="160" y2="320"/><line x1="320" y1="240" x2="480" y2="320"/>
+    <line x1="320" y1="240" x2="320" y2="350"/>
+  </g>
+  <g><circle cx="320" cy="240" r="46" fill="url(#screen)"/><circle cx="320" cy="240" r="46" fill="none" stroke="#ffffff" stroke-width="4"/><circle cx="320" cy="240" r="14" fill="#ffffff"/><g stroke="#ffffff" stroke-width="4"><line x1="320" y1="226" x2="320" y2="200"/><line x1="320" y1="254" x2="320" y2="280"/><line x1="306" y1="240" x2="280" y2="240"/><line x1="334" y1="240" x2="360" y2="240"/></g></g>
+  <g fill="#ffffff" stroke="#0a7185" stroke-width="5">
+    <rect x="150" y="112" width="60" height="46" rx="8"/><rect x="430" y="112" width="60" height="46" rx="8"/>
+    <rect x="128" y="298" width="60" height="46" rx="8"/><rect x="452" y="298" width="60" height="46" rx="8"/>
+    <rect x="292" y="332" width="56" height="42" rx="8"/>
+  </g>
+  <g fill="#0ea2bd"><circle cx="180" cy="135" r="7"/><circle cx="460" cy="135" r="7"/><circle cx="158" cy="321" r="7"/><circle cx="482" cy="321" r="7"/><circle cx="320" cy="353" r="7"/></g>
+</svg>

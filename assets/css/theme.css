@@ -207,6 +207,46 @@ h1, h2, h3, h4, h5, h6 { color: var(--text-strong); }
   }
 }
 
+/* Prekidač jezika */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 12px;
+  padding: 3px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+}
+.lang-switch .lang-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 5px 9px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-body);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background-color .2s ease, color .2s ease;
+}
+.lang-switch .lang-link:hover { color: var(--brand-600); }
+.lang-switch .lang-link.active {
+  background: var(--brand-500);
+  color: #fff;
+}
+@media (max-width: 1279px) {
+  .lang-switch {
+    position: fixed;
+    top: 16px;
+    right: 122px;
+    z-index: 9999;
+    background: var(--surface-1);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
 /* Tema dugme (ubacuje main.js) */
 .theme-toggle {
   display: inline-flex;
@@ -266,6 +306,16 @@ h1, h2, h3, h4, h5, h6 { color: var(--text-strong); }
 }
 .cta {
   background: linear-gradient(120deg, var(--brand-700), var(--brand-500));
+}
+
+/*--------------------------------------------------------------
+# 7b. On Focus (Testiranje bezbednosti) — zameni stock fotografije
+--------------------------------------------------------------*/
+.onfocus .video-play {
+  background: var(--surface-2) url("../img/illustrations/pentest-analiza.svg") center center / cover no-repeat;
+}
+.onfocus .content {
+  background: linear-gradient(135deg, var(--brand-700), var(--brand-800));
 }
 
 /*--------------------------------------------------------------
@@ -348,8 +398,17 @@ h1, h2, h3, h4, h5, h6 { color: var(--text-strong); }
 /*--------------------------------------------------------------
 # 10. Testimonials / Obuke
 --------------------------------------------------------------*/
+.testimonials {
+  background: linear-gradient(135deg, var(--brand-800), var(--brand-600));
+}
+.testimonials::before {
+  display: none;
+}
 .testimonials .testimonial-item {
   border-radius: var(--radius-lg);
+}
+.testimonials .testimonial-item .testimonial-img {
+  background: rgba(255, 255, 255, 0.08);
 }
 .swiper-pagination .swiper-pagination-bullet {
   background: var(--brand-300);
@@ -357,6 +416,20 @@ h1, h2, h3, h4, h5, h6 { color: var(--text-strong); }
 }
 .swiper-pagination .swiper-pagination-bullet-active {
   background: var(--brand-500);
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# 10b. Klijenti — logoi u teal tonu teme, prave boje na hover
+--------------------------------------------------------------*/
+.clients img {
+  /* duotone plavo: grayscale -> sepia -> pomeri hue na azurno plavo -> jako pojačaj */
+  filter: grayscale(1) sepia(1) hue-rotate(185deg) saturate(900%) brightness(1.05);
+  opacity: 0.9;
+  transition: filter .4s ease, opacity .4s ease;
+}
+.clients img:hover {
+  filter: none;
   opacity: 1;
 }
 

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Virtuelizacija servera">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eafbfe"/><stop offset="1" stop-color="#cdeef6"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0ea2bd"/><stop offset="1" stop-color="#0a7185"/></linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2db8cf"/><stop offset="1" stop-color="#0a7185"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7b955"/><stop offset="1" stop-color="#ef8f3c"/></linearGradient>
+  </defs>
+  <rect x="8" y="8" width="624" height="464" rx="32" fill="url(#bg)"/>
+  <circle cx="320" cy="232" r="150" fill="#ffffff" opacity="0.55"/>
+  <circle cx="520" cy="104" r="46" fill="#8fdce8" opacity="0.5"/>
+  <circle cx="116" cy="384" r="30" fill="#8fdce8" opacity="0.5"/>
+  <g fill="#0ea2bd" opacity="0.45"><circle cx="486" cy="392" r="5"/><circle cx="508" cy="392" r="5"/><circle cx="530" cy="392" r="5"/><circle cx="486" cy="414" r="5"/><circle cx="508" cy="414" r="5"/><circle cx="530" cy="414" r="5"/></g>
+
+  <rect x="206" y="270" width="228" height="90" rx="12" fill="url(#screen)"/>
+  <g fill="#9fe7f3"><circle cx="232" cy="315" r="7"/><circle cx="258" cy="315" r="7"/></g>
+  <rect x="360" y="305" width="50" height="10" rx="5" fill="#bdeaf2"/>
+  <rect x="214" y="118" width="92" height="74" rx="10" fill="#ffffff" stroke="#0a7185" stroke-width="5"/>
+  <rect x="288" y="150" width="92" height="74" rx="10" fill="#ffffff" stroke="#0a7185" stroke-width="5"/>
+  <rect x="360" y="118" width="92" height="74" rx="10" fill="#ffffff" stroke="#0a7185" stroke-width="5"/>
+  <g fill="#0ea2bd"><rect x="226" y="132" width="40" height="8" rx="4"/><rect x="300" y="164" width="40" height="8" rx="4"/><rect x="372" y="132" width="40" height="8" rx="4"/></g>
+  <g fill="#cfe6ec"><rect x="226" y="150" width="64" height="7" rx="3"/><rect x="226" y="166" width="50" height="7" rx="3"/><rect x="300" y="182" width="64" height="7" rx="3"/><rect x="372" y="150" width="64" height="7" rx="3"/></g>
+  <g stroke="#0a7185" stroke-width="4" opacity="0.6"><line x1="260" y1="192" x2="290" y2="270"/><line x1="334" y1="224" x2="320" y2="270"/><line x1="406" y1="192" x2="360" y2="270"/></g>
+</svg>
