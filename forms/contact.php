@@ -27,8 +27,10 @@ $smtp_host     = $config['smtp_host'];
 $smtp_username = $config['smtp_username'];
 $smtp_password = $config['smtp_password'];
 $smtp_port     = $config['smtp_port'];
-$smtp_encryption = $config['smtp_encryption'] ?? 'tls';   // 'tls' (587) ili 'ssl' (465)
-$smtp_debug      = $config['smtp_debug'] ?? 1;             // 1 = upiši SMTP dijalog u error_log
+$smtp_encryption = $config['smtp_encryption'] ?? 'tls';   // 'tls' (587), 'ssl' (465) ili '' (bez enkripcije)
+$smtp_debug      = $config['smtp_debug'] ?? 0;             // 1 = upiši SMTP dijalog u error_log
+$transport       = $config['transport'] ?? 'smtp';        // 'smtp' ili 'mail' (server-ov lokalni sendmail, bez auth)
+$smtp_auth       = $config['smtp_auth'] ?? true;          // false za localhost relay bez autentikacije
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'] ?? '';
@@ -52,15 +54,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->SMTPDebug = 2;            // detaljan SMTP dijalog
                 $mail->Debugoutput = 'error_log'; // u log, da ne pokvari JSON odgovor
             }
-            $mail->isSMTP();
-            $mail->Host = $smtp_host;
-            $mail->SMTPAuth = true;
-            $mail->Username = $smtp_username;
-            $mail->Password = $smtp_password;
-            $mail->SMTPSecure = ($smtp_encryption === 'ssl')
-                ? PHPMailer::ENCRYPTION_SMTPS      // SSL, obično port 465
-                : PHPMailer::ENCRYPTION_STARTTLS;  // TLS, obično port 587
-            $mail->Port = $smtp_port;
+            if ($transport === 'mail') {
+                // Server-ov lokalni sendmail — bez SMTP-a i bez autentikacije.
+                // Najpouzdanije na shared hostingu kada SMTP auth pravi problem.
+                $mail->isMail();
+            } else {
+                $mail->isSMTP();
+                $mail->Host = $smtp_host;
+                $mail->Port = $smtp_port;
+                $mail->SMTPAuth = (bool)$smtp_auth;
+                if ($smtp_auth) {
+                    $mail->Username = $smtp_username;
+                    $mail->Password = $smtp_password;
+                }
+                if ($smtp_encryption === 'ssl') {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;       // SSL, obično port 465
+                } elseif ($smtp_encryption === 'tls') {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;    // TLS, obično port 587
+                } else {
+                    $mail->SMTPSecure = false;                            // bez enkripcije (npr. localhost:25)
+                    $mail->SMTPAutoTLS = false;
+                }
+            }
 
             // Recipients
             $mail->setFrom($smtp_username, 'Contact Form');

@@ -12,11 +12,18 @@ return [
     // Adresa na koju stižu poruke iz forme
     'receiving_email_address' => 'office@geo-biz.com',
 
-    // SMTP server podaci
-    'smtp_host'     => 'mail.geo-biz.com',
-    'smtp_username' => 'office@geo-biz.com',   // puna email adresa naloga
-    'smtp_password' => 'Remorker1!Geobiz',           // TAČNA lozinka mailbox-a (cPanel/webmail)
-    'smtp_port'     => 587,                     // 587 za TLS, 465 za SSL
-    'smtp_encryption' => 'tls',                 // 'tls' (port 587) ili 'ssl' (port 465)
-    'smtp_debug'    => 0,                        // 1 = upiši detaljan SMTP dijalog u PHP error_log (za dijagnozu)
+    // === Način slanja ===
+    // 'mail' = serverov lokalni sendmail (BEZ SMTP autentikacije) — najlakše i najpouzdanije
+    //          na shared hostingu (dwhost), jer su sajt i sanduče na istom serveru.
+    // 'smtp' = slanje preko SMTP servera (zahteva tačne kredencijale ispod).
+    'transport' => 'mail',
+
+    // === SMTP podaci (koriste se SAMO ako je transport = 'smtp') ===
+    'smtp_host'       => 'mail.geo-biz.com',  // ili 'localhost' ili 'host107.dwhost.net'
+    'smtp_username'   => 'office@geo-biz.com', // puna email adresa naloga
+    'smtp_password'   => 'PROMENI_ME',         // TAČNA lozinka mailbox-a (cPanel/webmail)
+    'smtp_port'       => 587,                  // 587=TLS, 465=SSL, 25=localhost
+    'smtp_encryption' => 'tls',                // 'tls' | 'ssl' | '' (bez enkripcije, npr. localhost)
+    'smtp_auth'       => true,                 // false za localhost relay bez autentikacije
+    'smtp_debug'      => 0,                    // 1 = upiši SMTP dijalog u PHP error_log (dijagnoza)
 ];
