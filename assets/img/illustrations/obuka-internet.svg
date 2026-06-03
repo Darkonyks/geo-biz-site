@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Bezbedno koriscenje Interneta i drustvenih mreza">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2db8cf"/><stop offset="1" stop-color="#0a7185"/></linearGradient></defs>
+  <circle cx="100" cy="100" r="100" fill="url(#g)"/>
+
+  <circle cx="100" cy="100" r="48" fill="none" stroke="#ffffff" stroke-width="9"/>
+  <ellipse cx="100" cy="100" rx="20" ry="48" fill="none" stroke="#ffffff" stroke-width="7"/>
+  <line x1="54" y1="84" x2="146" y2="84" stroke="#ffffff" stroke-width="7"/>
+  <line x1="52" y1="116" x2="148" y2="116" stroke="#ffffff" stroke-width="7"/>
+</svg>

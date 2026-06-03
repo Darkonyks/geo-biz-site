@@ -263,9 +263,9 @@ section {
     margin-right: 50px;
   }
 }
-/* 
+
 /*--------------------------------------------------------------
-# Desktop Navigation 
+# Desktop Navigation
 --------------------------------------------------------------*/
 @media (min-width: 1280px) {
   .navbar {
@@ -548,7 +548,7 @@ section {
     background: rgba(var(--color-secondary-rgb), 0.8);
     z-index: 9996;
   }
-} */
+}
 
 /*--------------------------------------------------------------
 # Index Page
@@ -3178,127 +3178,6 @@ section {
   text-decoration: none;
 }
 
-/*---------------------------------------------------- */
-/*Before After area*/
-/*----------------------------------------------------*/
-.arck-before-after-section {
-  padding: 125px 0px;
-}
-.arck-before-after-section:before, .arck-before-after-section:after {
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  content: "";
-  height: 605px;
-  position: absolute;
-  background: url(../img/bg/ba-bg.jpg);
-}
-.arck-before-after-section:after {
-  background: rgba(0, 0, 0, 0.7);
-}
-.arck-before-after-section .arck-section-title-2 {
-  max-width: 480px;
-}
-.arck-before-after-section .arck-section-title-2 h2 {
-  color: var(--white-color);
-}
-
-.arck-before-item {
-  margin-right: 10px;
-}
-
-.arck-before-after-content {
-  padding-top: 45px;
-}
-.arck-before-after-content .twentytwenty-handle {
-  background-color: var(--main-color);
-  border: none;
-}
-.arck-before-after-content .twentytwenty-after-label:before {
-  content: "AFTER DESIGN";
-}
-.arck-before-after-content .twentytwenty-before-label:before {
-  content: "BEFORE DESIGN";
-}
-.arck-before-after-content .twentytwenty-before-label:before, .arck-before-after-content .twentytwenty-after-label:before {
-  top: auto;
-  bottom: 30px;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 0px 15px;
-  line-height: 30px;
-  color: var(--white-color);
-  background-color: var(--main-color);
-}
-.arck-before-after-content .twentytwenty-horizontal .twentytwenty-before-label:before {
-  left: 30px;
-}
-.arck-before-after-content .twentytwenty-horizontal .twentytwenty-after-label:before {
-  right: 30px;
-}
-.arck-before-after-content .twentytwenty-overlay:hover {
-  background-color: transparent;
-}
-.arck-before-after-content .twentytwenty-before-label,
-.arck-before-after-content .twentytwenty-after-label {
-  opacity: 1;
-}
-
-/*Skill area*/
-/*----------------------------------------------------*/
-
-.arck-working-skill-section {
-  padding: 70px 0px;
-}
-.arck-working-skill-section .arck-section-title-2 h2 {
-  padding-bottom: 20px;
-}
-.arck-working-skill-section .arck-section-title {
-  padding-bottom: 20px;
-  max-width: 650px;
-}
-
-.arck-working-skill-text-wrap {
-  max-width: 600px;
-}
-
-.arck-skill-progress-bar {
-  padding-top: 20px;
-}
-.arck-skill-progress-bar .skill-set-percent {
-  margin-bottom: 32px;
-}
-.arck-skill-progress-bar .skill-set-percent h4 {
-  color: var(--black-color);
-  font-size: 16px;
-  padding-bottom: 15px;
-  text-transform: uppercase;
-}
-.arck-skill-progress-bar .skill-set-percent .progress {
-  height: 10px;
-  border-radius: 0;
-  position: relative;
-  overflow: visible;
-  border: 1px solid var(--black-color);
-  background-color: transparent;
-}
-.arck-skill-progress-bar .skill-set-percent .progress span {
-  right: 0;
-  top: -25px;
-  font-weight: 600;
-  position: absolute;
-  font-family: var(--body-font-2);
-}
-.arck-skill-progress-bar .skill-set-percent .progress-bar {
-  width: 0;
-  left: 2px;
-  top: 2px;
-  float: left;
-  height: 4px;
-  position: relative;
-  border-radius: 0;
-  -webkit-transition: 1s all ease-in-out;
-  transition: 1s all ease-in-out;
-  background-color: var(--black-color);
-}
+/* Napomena: uklonjen mrtav "arck-*" blok (ostatak drugog šablona) —
+   selektori se nisu poklapali ni sa jednim elementom i koristili su
+   nedefinisane varijable (--main-color, --white-color, --black-color, --body-font-2). */

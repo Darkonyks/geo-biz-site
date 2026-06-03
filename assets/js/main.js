@@ -20,6 +20,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
+   * Theme toggle (svetla / tamna tema) — ubacuje dugme u header,
+   * pamti izbor u localStorage; podrazumevano prati sistemsko podešavanje.
+   */
+  (function initThemeToggle() {
+    const STORAGE_KEY = 'geobiz-theme';
+    const header = document.querySelector('#header .container-fluid') || document.querySelector('#header');
+    if (!header) return;
+
+    const getStarted = header.querySelector('.btn-getstarted');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-label', 'Promeni temu (svetla/tamna)');
+    const icon = document.createElement('i');
+    btn.appendChild(icon);
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function currentTheme() {
+      return document.documentElement.getAttribute('data-theme')
+        || (prefersDark.matches ? 'dark' : 'light');
+    }
+    function syncIcon() {
+      const dark = currentTheme() === 'dark';
+      icon.className = dark ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+      btn.setAttribute('aria-pressed', String(dark));
+      btn.title = dark ? 'Pređi na svetlu temu' : 'Pređi na tamnu temu';
+    }
+    btn.addEventListener('click', () => {
+      const next = currentTheme() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+      syncIcon();
+    });
+    prefersDark.addEventListener('change', () => {
+      if (!document.documentElement.getAttribute('data-theme')) syncIcon();
+    });
+
+    syncIcon();
+    if (getStarted) header.insertBefore(btn, getStarted);
+    else header.appendChild(btn);
+  })();
+
+  /**
    * Sticky header on scroll
    */
   const selectHeader = document.querySelector('#header');
@@ -109,13 +153,22 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const mobileNavToogle = document.querySelector('.mobile-nav-toggle');
   if (mobileNavToogle) {
-    mobileNavToogle.addEventListener('click', function(event) {
+    mobileNavToogle.setAttribute('role', 'button');
+    mobileNavToogle.setAttribute('tabindex', '0');
+    mobileNavToogle.setAttribute('aria-label', 'Otvori ili zatvori meni');
+    mobileNavToogle.setAttribute('aria-controls', 'navbar');
+    mobileNavToogle.setAttribute('aria-expanded', 'false');
+
+    const toggleNav = function(event) {
       event.preventDefault();
-
-      document.querySelector('body').classList.toggle('mobile-nav-active');
-
-      this.classList.toggle('bi-list');
-      this.classList.toggle('bi-x');
+      const active = document.querySelector('body').classList.toggle('mobile-nav-active');
+      mobileNavToogle.classList.toggle('bi-list');
+      mobileNavToogle.classList.toggle('bi-x');
+      mobileNavToogle.setAttribute('aria-expanded', String(active));
+    };
+    mobileNavToogle.addEventListener('click', toggleNav);
+    mobileNavToogle.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') toggleNav(e);
     });
   }
 
@@ -125,15 +178,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const navDropdowns = document.querySelectorAll('.navbar .dropdown > a');
 
   navDropdowns.forEach(el => {
+    el.setAttribute('aria-haspopup', 'true');
+    el.setAttribute('aria-expanded', 'false');
     el.addEventListener('click', function(event) {
       if (document.querySelector('.mobile-nav-active')) {
         event.preventDefault();
         this.classList.toggle('active');
-        this.nextElementSibling.classList.toggle('dropdown-active');
+        const open = this.nextElementSibling.classList.toggle('dropdown-active');
+        this.setAttribute('aria-expanded', String(open));
 
         let dropDownIndicator = this.querySelector('.dropdown-indicator');
-        dropDownIndicator.classList.toggle('bi-chevron-up');
-        dropDownIndicator.classList.toggle('bi-chevron-down');
+        if (dropDownIndicator) {
+          dropDownIndicator.classList.toggle('bi-chevron-up');
+          dropDownIndicator.classList.toggle('bi-chevron-down');
+        }
       }
     })
   });

@@ -40,6 +40,7 @@ temp/
 out/
 
 # Environment files
+forms/config.php
 .env
 .env.local
 .env.development.local
@@ -97,5 +98,7 @@ config.dev.js
 
 # Specific to this project
 # Add any project-specific files or directories here
+# Ugnježdeni bare repo / artefakt git-filter-repo (ne sme u VCS)
+geo-biz-sajt.git/
 GeoBiz sajt.zip 
 GeoBiz sajt.zip
