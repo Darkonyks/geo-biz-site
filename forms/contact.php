@@ -27,6 +27,8 @@ $smtp_host     = $config['smtp_host'];
 $smtp_username = $config['smtp_username'];
 $smtp_password = $config['smtp_password'];
 $smtp_port     = $config['smtp_port'];
+$smtp_encryption = $config['smtp_encryption'] ?? 'tls';   // 'tls' (587) ili 'ssl' (465)
+$smtp_debug      = $config['smtp_debug'] ?? 1;             // 1 = upiši SMTP dijalog u error_log
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'] ?? '';
@@ -46,12 +48,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             // Server settings
+            if ($smtp_debug) {
+                $mail->SMTPDebug = 2;            // detaljan SMTP dijalog
+                $mail->Debugoutput = 'error_log'; // u log, da ne pokvari JSON odgovor
+            }
             $mail->isSMTP();
             $mail->Host = $smtp_host;
             $mail->SMTPAuth = true;
             $mail->Username = $smtp_username;
             $mail->Password = $smtp_password;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->SMTPSecure = ($smtp_encryption === 'ssl')
+                ? PHPMailer::ENCRYPTION_SMTPS      // SSL, obično port 465
+                : PHPMailer::ENCRYPTION_STARTTLS;  // TLS, obično port 587
             $mail->Port = $smtp_port;
 
             // Recipients

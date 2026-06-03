@@ -125,7 +125,7 @@ Trenutno svi linkovi vode na isti `inner-page.html` (placeholder).
 
 ### Kontakt forma — tok rada
 `contact-form.js` presreće submit, šalje `fetch` POST na `forms/contact.php`,
-koja preko **PHPMailer + SMTP** (`host107.dwhost.net:587`, STARTTLS) šalje mejl
+koja preko **PHPMailer + SMTP** (`mail.geo-biz.com:587`, STARTTLS) šalje mejl
 na `office@geo-biz.com` i vraća JSON odgovor; rezultat se prikazuje kroz `alert()`.
 
 ---

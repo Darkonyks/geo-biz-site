@@ -13,8 +13,10 @@ return [
     'receiving_email_address' => 'office@geo-biz.com',
 
     // SMTP server podaci
-    'smtp_host'     => 'smtp.example.com',
-    'smtp_username' => 'office@geo-biz.com',
-    'smtp_password' => 'PROMENI_ME',
-    'smtp_port'     => 587,
+    'smtp_host'     => 'mail.geo-biz.com',
+    'smtp_username' => 'office@geo-biz.com',   // puna email adresa naloga
+    'smtp_password' => 'Remorker1!Geobiz',           // TAČNA lozinka mailbox-a (cPanel/webmail)
+    'smtp_port'     => 587,                     // 587 za TLS, 465 za SSL
+    'smtp_encryption' => 'tls',                 // 'tls' (port 587) ili 'ssl' (port 465)
+    'smtp_debug'    => 0,                        // 1 = upiši detaljan SMTP dijalog u PHP error_log (za dijagnozu)
 ];

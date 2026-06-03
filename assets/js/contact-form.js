@@ -17,18 +17,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    this.reset();
-                } else {
-                    alert(data.message);
+            .then(async (response) => {
+                const raw = await response.text();
+                let data = null;
+                try { data = JSON.parse(raw); } catch (e) { /* nije JSON */ }
+
+                if (!response.ok || !data) {
+                    // Najčešće: server ne izvršava PHP (npr. Live Server -> 405),
+                    // ili PHP ispisuje grešku umesto JSON-a.
+                    let hint = 'Server status ' + response.status;
+                    if (response.status === 405 || response.status === 501) {
+                        hint += ' — stranica se ne servira preko PHP-a (kontakt forma radi samo na PHP serveru/hostingu).';
+                    } else if (raw) {
+                        hint += ': ' + raw.replace(/<[^>]+>/g, '').trim().slice(0, 200);
+                    }
+                    throw new Error(hint);
                 }
+                return data;
+            })
+            .then(data => {
+                alert(data.message);
+                if (data.success) this.reset();
             })
             .catch(error => {
-                alert('An error occurred. Please try again later.');
-                console.error('Error:', error);
+                alert('Greška pri slanju poruke. ' + error.message);
+                console.error('Contact form error:', error);
             })
             .finally(() => {
                 // Re-enable submit button
